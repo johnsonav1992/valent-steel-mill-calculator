@@ -52,7 +52,7 @@ export const convertSpecPercentages = ( spec: SpecFormInput ) => {
 
     let element: SteelElement;
     for ( element in spec ) {
-        convertedSpec[ element ] = spec[ element ] ?? 0 / 100;
+        convertedSpec[ element ] = ( spec[ element ] ?? 0 ) / 100;
     }
     return convertedSpec;
 };
