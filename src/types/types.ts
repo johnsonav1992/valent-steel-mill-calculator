@@ -11,7 +11,14 @@ export type SteelElement =
     | 'iron';
 
 export type SteelSpec = Record<SteelElement, number>;
+export type SpecFormInput = {
+    [ Elem in keyof SteelSpec ]: number | null
+};
+
+export type WeightsOutput = SteelSpec;
 
 export type SteelSpecFormValues = {
-    [Elem in SteelElement]: number | null;
+    initialTotalWeight: number | null;
+    initialSpec: SpecFormInput;
+    finalSpec: SpecFormInput;
 };

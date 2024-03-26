@@ -4,6 +4,11 @@ import {
 } from '@mui/material';
 import InputForm from './components/InputForm/InputForm';
 import { createFormStore } from 'formularity';
+import {
+    SteelSpecFormValues
+    , WeightsOutput
+} from './types/types';
+import { useState } from 'react';
 
 const initialValues = {
     initialTotalWeight: null
@@ -33,9 +38,10 @@ const initialValues = {
     }
 };
 
-export const formStore = createFormStore( { initialValues } );
+export const formStore = createFormStore<SteelSpecFormValues>( { initialValues } );
 
 function App () {
+    const [ result, setResult ] = useState<WeightsOutput | null>( null );
 
     return (
         <Stack
@@ -55,7 +61,7 @@ function App () {
                     direction='row'
                     gap='1rem'
                 >
-                    <InputForm />
+                    <InputForm setResult={ setResult } />
                 </Stack>
             </Stack>
         </Stack>

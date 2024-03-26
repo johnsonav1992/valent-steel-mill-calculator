@@ -1,6 +1,8 @@
 import {
-    SteelElement
+    SpecFormInput
+    , SteelElement
     , SteelSpec
+    , WeightsOutput
 } from '../types/types';
 
 export const findMaxDecreaseElement = ( initSpec: SteelSpec, finalSpec: SteelSpec ) => {
@@ -28,7 +30,7 @@ export const calculateWeightsToAdd = (
     const finalTotalSpecWeight
       = ( initSpec[ maxDecreaseElement ] * initWeight ) / finalSpec[ maxDecreaseElement ];
 
-    const weightsToAdd = {} as SteelSpec;
+    const weightsToAdd = {} as WeightsOutput;
 
     let elem: SteelElement;
     for ( elem in finalSpec ) {
@@ -45,12 +47,12 @@ export const calculateWeightsToAdd = (
     return weightsToAdd;
 };
 
-export const convertSpecPercentages = ( spec: SteelSpec ) => {
+export const convertSpecPercentages = ( spec: SpecFormInput ) => {
     const convertedSpec = {} as SteelSpec;
 
     let element: SteelElement;
     for ( element in spec ) {
-        convertedSpec[ element ] = spec[ element ] / 100;
+        convertedSpec[ element ] = spec[ element ] ?? 0 / 100;
     }
     return convertedSpec;
 };

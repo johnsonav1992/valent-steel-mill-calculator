@@ -1,5 +1,8 @@
 import { Formularity } from 'formularity';
-import { SteelElement } from '../../types/types';
+import {
+    SteelElement
+    , WeightsOutput
+} from '../../types/types';
 import {
     Button
     , Stack
@@ -8,12 +11,32 @@ import {
     , capitalize
 } from '@mui/material';
 import { formStore } from '../../App';
+import {
+    calculateWeightsToAdd
+    , convertSpecPercentages
+} from '../../utils/utils';
+import {
+    Dispatch
+    , SetStateAction
+} from 'react';
 
-const InputForm = () => {
+type Props = {
+    setResult: Dispatch<SetStateAction<WeightsOutput | null>>;
+};
+
+const InputForm = ( { setResult }: Props ) => {
+
     return (
         <Formularity
             formStore={ formStore }
-            onSubmit={ values => console.log( values ) }
+            onSubmit={ values => {
+                calculateWeightsToAdd(
+                    convertSpecPercentages( values.initialSpec )
+                    , convertSpecPercentages( values.finalSpec )
+                    , Number( values.initialTotalWeight )
+                );
+            }
+            }
         >
             { ( {
                 initialValues
