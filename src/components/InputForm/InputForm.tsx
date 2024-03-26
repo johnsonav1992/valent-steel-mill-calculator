@@ -30,11 +30,13 @@ const InputForm = ( { setResult }: Props ) => {
         <Formularity
             formStore={ formStore }
             onSubmit={ values => {
-                calculateWeightsToAdd(
+                const weightCalculations = calculateWeightsToAdd(
                     convertSpecPercentages( values.initialSpec )
                     , convertSpecPercentages( values.finalSpec )
                     , Number( values.initialTotalWeight )
                 );
+
+                setResult( weightCalculations );
             }
             }
         >

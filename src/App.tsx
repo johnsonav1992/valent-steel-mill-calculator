@@ -38,7 +38,9 @@ const initialValues = {
     }
 };
 
-export const formStore = createFormStore<SteelSpecFormValues>( { initialValues } );
+export const formStore = createFormStore<SteelSpecFormValues>( {
+    initialValues
+} );
 
 function App () {
     const [ result, setResult ] = useState<WeightsOutput | null>( null );
