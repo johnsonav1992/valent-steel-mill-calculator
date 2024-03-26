@@ -30,6 +30,18 @@ const InputForm = ( { setResult }: Props ) => {
         <Formularity
             formStore={ formStore }
             onSubmit={ values => {
+                const isMissingAnyValue
+                    = Object.entries( values.initialSpec ).some( ( [ , value ] ) => !value )
+                    || Object.entries( values.finalSpec ).some( ( [ , value ] ) => !value );
+
+                if ( isMissingAnyValue ) {
+                    return alert( 'Please enter all values for each  specification.' );
+                }
+
+                if ( !values.initialTotalWeight ) {
+                    return alert( 'Please enter a weight for the initial batch.' );
+                }
+
                 const weightCalculations = calculateWeightsToAdd(
                     convertSpecPercentages( values.initialSpec )
                     , convertSpecPercentages( values.finalSpec )

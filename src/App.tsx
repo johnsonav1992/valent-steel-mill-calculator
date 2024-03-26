@@ -5,7 +5,8 @@ import {
 import InputForm from './components/InputForm/InputForm';
 import { createFormStore } from 'formularity';
 import {
-    SteelSpecFormValues
+    SteelElement
+    , SteelSpecFormValues
     , WeightsOutput
 } from './types/types';
 import { useState } from 'react';
@@ -63,7 +64,27 @@ function App () {
                     direction='row'
                     gap='1rem'
                 >
-                    <InputForm setResult={ setResult } />
+                    {
+                        result
+                            ? (
+                                <Stack>
+                                    { ( Object.entries( result ) as Array<[SteelElement, number]> ).map( ( [ elem, weight ] ) => {
+                                        return (
+                                            <Stack
+                                                key={ elem }
+                                                direction='row'
+                                                gap='1rem'
+                                            >
+                                                <p>{ elem }</p>
+                                                <p>{ weight }</p>
+                                            </Stack>
+                                        );
+                                    } ) }
+                                </Stack>
+                            )
+                            : <InputForm setResult={ setResult } />
+                    }
+
                 </Stack>
             </Stack>
         </Stack>
