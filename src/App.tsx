@@ -5,37 +5,37 @@ import {
 import InputForm from './components/InputForm/InputForm';
 import { createFormStore } from 'formularity';
 import {
-    SteelElement
-    , SteelSpecFormValues
+    SteelSpecFormValues
     , WeightsOutput
 } from './types/types';
 import { useState } from 'react';
+import ResultsView from './components/ResultsView/ResultsView';
 
 const initialValues = {
-    initialTotalWeight: null
+    initialTotalWeight: ''
     , initialSpec: {
-        carbon: null
-        , chromium: null
-        , iron: null
-        , manganese: null
-        , molybdenum: null
-        , nickel: null
-        , nitrogen: null
-        , phosphorus: null
-        , silicon: null
-        , sulfur: null
+        carbon: ''
+        , chromium: ''
+        , iron: ''
+        , manganese: ''
+        , molybdenum: ''
+        , nickel: ''
+        , nitrogen: ''
+        , phosphorus: ''
+        , silicon: ''
+        , sulfur: ''
     }
     , finalSpec: {
-        carbon: null
-        , chromium: null
-        , iron: null
-        , manganese: null
-        , molybdenum: null
-        , nickel: null
-        , nitrogen: null
-        , phosphorus: null
-        , silicon: null
-        , sulfur: null
+        carbon: ''
+        , chromium: ''
+        , iron: ''
+        , manganese: ''
+        , molybdenum: ''
+        , nickel: ''
+        , nitrogen: ''
+        , phosphorus: ''
+        , silicon: ''
+        , sulfur: ''
     }
 };
 
@@ -51,11 +51,12 @@ function App () {
             width='100%'
             alignItems='center'
             justifyContent='center'
+            bgcolor={ theme => theme.palette.grey[ 200 ] }
             p='2rem'
         >
             <Stack
                 component={ Paper }
-                elevation={ 3 }
+                elevation={ 5 }
                 sx={ {
                     p: '2rem'
                 } }
@@ -67,20 +68,24 @@ function App () {
                     {
                         result
                             ? (
-                                <Stack>
-                                    { ( Object.entries( result ) as Array<[SteelElement, number]> ).map( ( [ elem, weight ] ) => {
-                                        return (
-                                            <Stack
-                                                key={ elem }
-                                                direction='row'
-                                                gap='1rem'
-                                            >
-                                                <p>{ elem }</p>
-                                                <p>{ weight }</p>
-                                            </Stack>
-                                        );
-                                    } ) }
-                                </Stack>
+                                // <Stack>
+                                //     { ( Object.entries( result ) as Array<[SteelElement, number]> ).map( ( [ elem, weight ] ) => {
+                                //         return (
+                                //             <Stack
+                                //                 key={ elem }
+                                //                 direction='row'
+                                //                 gap='1rem'
+                                //             >
+                                //                 <p>{ elem }</p>
+                                //                 <p>{ weight }</p>
+                                //             </Stack>
+                                //         );
+                                //     } ) }
+                                // </Stack>
+                                <ResultsView
+                                    result={ result }
+                                    setResult={ setResult }
+                                />
                             )
                             : <InputForm setResult={ setResult } />
                     }

@@ -56,16 +56,17 @@ const InputForm = ( { setResult }: Props ) => {
                 initialValues
                 , Field
                 , SubmitButton
+                , ResetButton
             } ) => (
                 <Stack gap='1rem'>
-                    <Stack>
-                        <Typography variant='h6'>
+                    <Stack gap='.5rem'>
+                        <Typography>
                             Initial Steel Batch Weight
                         </Typography>
                         <Field
                             name='initialTotalWeight'
                             type='number'
-                            placeholder='Enter weight of entire batch in kg'
+                            placeholder='Enter weight of entire batch'
                             component={ TextField }
                             size='small'
                             InputProps={ { endAdornment: 'kg' } }
@@ -75,8 +76,8 @@ const InputForm = ( { setResult }: Props ) => {
                         direction='row'
                         gap='1rem'
                     >
-                        <Stack gap='1rem'>
-                            <Typography variant='h6'>
+                        <Stack gap='.5rem'>
+                            <Typography>
                                 Initial Specifications
                             </Typography>
                             {
@@ -93,8 +94,8 @@ const InputForm = ( { setResult }: Props ) => {
                                 ) ) )
                             }
                         </Stack>
-                        <Stack gap='1rem'>
-                            <Typography variant='h6'>
+                        <Stack gap='.5rem'>
+                            <Typography>
                                 Final Specifications
                             </Typography>
                             {
@@ -112,12 +113,26 @@ const InputForm = ( { setResult }: Props ) => {
                             }
                         </Stack>
                     </Stack>
-                    <SubmitButton
-                        component={ Button }
-                        variant='contained'
+                    <Stack
+                        direction='row'
+                        width='75%'
+                        gap='1rem'
+                        alignSelf='flex-end'
+                        justifyContent='flex-end'
                     >
-                        Submit
-                    </SubmitButton>
+                        <ResetButton
+                            component={ Button }
+                            variant='outlined'
+                        >
+                            Reset
+                        </ResetButton>
+                        <SubmitButton
+                            component={ Button }
+                            variant='contained'
+                        >
+                            Submit
+                        </SubmitButton>
+                    </Stack>
                 </Stack>
             ) }
         </Formularity>
