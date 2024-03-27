@@ -10,6 +10,7 @@ import {
 } from './types/types';
 import { useState } from 'react';
 import ResultsView from './components/ResultsView/ResultsView';
+import WarningModal from './components/WarningModal/WarningModal';
 
 const initialValues = {
     initialTotalWeight: ''
@@ -45,29 +46,33 @@ export const formStore = createFormStore<SteelSpecFormValues>( {
 
 function App () {
     const [ result, setResult ] = useState<WeightsOutput | null>( null );
+    const [ warningMessage, setWarningMessage ] = useState( '' );
+    const [ isWarningModalOpen, setIsWarningModalOpen ] = useState( !!warningMessage );
 
     return (
-        <Stack
-            width='100%'
-            alignItems='center'
-            justifyContent='center'
-            bgcolor={ theme => theme.palette.grey[ 200 ] }
-            p='2rem'
-        >
+        <>
             <Stack
-                component={ Paper }
-                elevation={ 5 }
-                sx={ {
-                    p: '2rem'
-                } }
+                width='100%'
+                height='100vh'
+                alignItems='center'
+                justifyContent='center'
+                bgcolor={ theme => theme.palette.grey[ 200 ] }
+                p='2rem'
             >
                 <Stack
-                    direction='row'
-                    gap='1rem'
+                    component={ Paper }
+                    elevation={ 5 }
+                    sx={ {
+                        p: '2rem'
+                    } }
                 >
-                    {
-                        result
-                            ? (
+                    <Stack
+                        direction='row'
+                        gap='1rem'
+                    >
+                        {
+                            result
+                                ? (
                                 // <Stack>
                                 //     { ( Object.entries( result ) as Array<[SteelElement, number]> ).map( ( [ elem, weight ] ) => {
                                 //         return (
@@ -82,17 +87,32 @@ function App () {
                                 //         );
                                 //     } ) }
                                 // </Stack>
-                                <ResultsView
-                                    result={ result }
-                                    setResult={ setResult }
-                                />
-                            )
-                            : <InputForm setResult={ setResult } />
-                    }
-
+                                    <ResultsView
+                                        result={ result }
+                                        setResult={ setResult }
+                                    />
+                                )
+                                : (
+                                    <InputForm
+                                        setResult={ setResult }
+                                        setWarningMessage={ setWarningMessage }
+                                        setIsWarningModalOpen={ setIsWarningModalOpen }
+                                    />
+                                )
+                        }
+                    </Stack>
                 </Stack>
             </Stack>
-        </Stack>
+            <WarningModal
+                open={ isWarningModalOpen }
+                closeHandler={ () => {
+                    setIsWarningModalOpen( false );
+                    setTimeout( () => setWarningMessage( '' ), 200 );
+                } }
+                message={ warningMessage }
+                keepMounted={ false }
+            />
+        </>
     );
 }
 

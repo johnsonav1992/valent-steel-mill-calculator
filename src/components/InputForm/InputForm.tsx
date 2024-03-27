@@ -22,9 +22,20 @@ import {
 
 type Props = {
     setResult: Dispatch<SetStateAction<WeightsOutput | null>>;
+    setWarningMessage: Dispatch<SetStateAction<string>>;
+    setIsWarningModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-const InputForm = ( { setResult }: Props ) => {
+const InputForm = ( {
+    setResult
+    , setWarningMessage
+    , setIsWarningModalOpen
+}: Props ) => {
+
+    const openWarningModal = ( message: string ) => {
+        setWarningMessage( message );
+        setIsWarningModalOpen( true );
+    };
 
     return (
         <Formularity
@@ -34,12 +45,21 @@ const InputForm = ( { setResult }: Props ) => {
                     = Object.entries( values.initialSpec ).some( ( [ , value ] ) => !value )
                     || Object.entries( values.finalSpec ).some( ( [ , value ] ) => !value );
 
+                const initialSpecPercent = Object.entries( values.finalSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
+                const finalSpecPercent = Object.entries( values.initialSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
+
+                const isNotCorrectTotalPercent = initialSpecPercent !== 100 || finalSpecPercent !== 100;
+
                 if ( isMissingAnyValue ) {
-                    return alert( 'Please enter all values for each  specification.' );
+                    return openWarningModal( 'Please enter all values for each  specification.' );
+                }
+
+                if ( isNotCorrectTotalPercent ) {
+                    return openWarningModal( 'The total percentage for each specification must be 100%.' );
                 }
 
                 if ( !values.initialTotalWeight ) {
-                    return alert( 'Please enter a weight for the initial batch.' );
+                    return openWarningModal( 'Please enter a weight for the initial batch.' );
                 }
 
                 const weightCalculations = calculateWeightsToAdd(
@@ -49,8 +69,7 @@ const InputForm = ( { setResult }: Props ) => {
                 );
 
                 setResult( weightCalculations );
-            }
-            }
+            } }
         >
             { ( {
                 initialValues
