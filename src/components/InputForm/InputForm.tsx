@@ -45,13 +45,15 @@ const InputForm = ( {
                     = Object.entries( values.initialSpec ).some( ( [ , value ] ) => !value )
                     || Object.entries( values.finalSpec ).some( ( [ , value ] ) => !value );
 
-                const initialSpecPercent = Object.entries( values.finalSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
-                const finalSpecPercent = Object.entries( values.initialSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
+                const initialSpecPercent = Object.entries( values.initialSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
+
+                const finalSpecPercent = Object.entries( values.finalSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
+                console.log( { initialSpecPercent }, { finalSpecPercent } );
 
                 const isNotCorrectTotalPercent = initialSpecPercent !== 100 || finalSpecPercent !== 100;
 
                 if ( isMissingAnyValue ) {
-                    return openWarningModal( 'Please enter all values for each  specification.' );
+                    return openWarningModal( 'Please enter all values for each specification.' );
                 }
 
                 if ( isNotCorrectTotalPercent ) {

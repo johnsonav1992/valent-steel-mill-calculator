@@ -1,9 +1,13 @@
 import {
-    Paper
+    Chip
+    , Paper
     , Stack
 } from '@mui/material';
 import InputForm from './components/InputForm/InputForm';
-import { createFormStore } from 'formularity';
+import {
+    createFormStore
+    , useFormularity
+} from 'formularity';
 import {
     SteelSpecFormValues
     , WeightsOutput
@@ -11,6 +15,7 @@ import {
 import { useState } from 'react';
 import ResultsView from './components/ResultsView/ResultsView';
 import WarningModal from './components/WarningModal/WarningModal';
+import { generateDummyData } from './data/generateDummyData';
 
 const initialValues = {
     initialTotalWeight: ''
@@ -49,6 +54,8 @@ function App () {
     const [ warningMessage, setWarningMessage ] = useState( '' );
     const [ isWarningModalOpen, setIsWarningModalOpen ] = useState( !!warningMessage );
 
+    const { resetForm } = useFormularity( { formStore } );
+
     return (
         <>
             <Stack
@@ -64,8 +71,32 @@ function App () {
                     elevation={ 5 }
                     sx={ {
                         p: '2rem'
+                        , pb: result ? '1rem' : undefined
+                        , position: 'relative'
                     } }
                 >
+                    {
+                        !result
+                        && (
+                            <Chip
+                                label='Generate Data'
+                                sx={ {
+                                    position: 'absolute'
+                                    , top: '1rem'
+                                    , right: '2rem'
+                                } }
+                                clickable
+                                onClick={ () => {
+                                    const dummyData = generateDummyData();
+                                    resetForm( {
+                                        initialTotalWeight: 1000
+                                        , initialSpec: dummyData.initialSpec
+                                        , finalSpec: dummyData.finalSpec
+                                    } );
+                                } }
+                            />
+                        )
+                    }
                     <Stack
                         direction='row'
                         gap='1rem'
@@ -73,20 +104,6 @@ function App () {
                         {
                             result
                                 ? (
-                                // <Stack>
-                                //     { ( Object.entries( result ) as Array<[SteelElement, number]> ).map( ( [ elem, weight ] ) => {
-                                //         return (
-                                //             <Stack
-                                //                 key={ elem }
-                                //                 direction='row'
-                                //                 gap='1rem'
-                                //             >
-                                //                 <p>{ elem }</p>
-                                //                 <p>{ weight }</p>
-                                //             </Stack>
-                                //         );
-                                //     } ) }
-                                // </Stack>
                                     <ResultsView
                                         result={ result }
                                         setResult={ setResult }

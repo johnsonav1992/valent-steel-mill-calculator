@@ -39,14 +39,20 @@ const ResultsView = ( {
                 sx={ {
                     backgroundColor: theme => theme.palette.grey[ 200 ]
                     , p: '.5rem'
+                    , pb: 0
                 } }
             >
-                <Typography
-                    variant='h5'
-                    ml='16px'
-                >
-                    Results
-                </Typography>
+                <Stack ml='16px'>
+                    <Typography variant='h5'>
+                        Results
+                    </Typography>
+                    <Typography
+                        variant='caption'
+                        fontStyle='italic'
+                    >
+                        *All weights shown below will be added to the mixture to achieve final spec
+                    </Typography>
+                </Stack>
             </Stack>
             <TableContainer
                 sx={ {
