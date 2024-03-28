@@ -21,7 +21,7 @@ export const findMaxDecreaseElement = ( initSpec: SteelSpec, finalSpec: SteelSpe
     return elementWithMaxDecrease;
 };
 
-export const calculateWeightsToAdd = (
+export const calculateWeightIncreases = (
     initSpec: SteelSpec
     , finalSpec: SteelSpec
     , initWeight: number

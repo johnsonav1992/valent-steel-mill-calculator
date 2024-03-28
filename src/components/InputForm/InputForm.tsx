@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { formStore } from '../../App';
 import {
-    calculateWeightsToAdd
+    calculateWeightIncreases
     , convertSpecPercentages
 } from '../../utils/utils';
 import {
@@ -63,7 +63,7 @@ const InputForm = ( {
                     return openWarningModal( 'Please enter a weight for the initial batch.' );
                 }
 
-                const weightCalculations = calculateWeightsToAdd(
+                const weightCalculations = calculateWeightIncreases(
                     convertSpecPercentages( values.initialSpec )
                     , convertSpecPercentages( values.finalSpec )
                     , Number( values.initialTotalWeight )
@@ -80,7 +80,7 @@ const InputForm = ( {
             } ) => (
                 <Stack gap='1rem'>
                     <Stack gap='.5rem'>
-                        <Typography>
+                        <Typography fontWeight={ 600 }>
                             Initial Steel Batch Weight
                         </Typography>
                         <Field
@@ -97,7 +97,7 @@ const InputForm = ( {
                         gap='1rem'
                     >
                         <Stack gap='.5rem'>
-                            <Typography>
+                            <Typography fontWeight={ 600 }>
                                 Initial Specifications
                             </Typography>
                             {
@@ -115,7 +115,7 @@ const InputForm = ( {
                             }
                         </Stack>
                         <Stack gap='.5rem'>
-                            <Typography>
+                            <Typography fontWeight={ 600 }>
                                 Final Specifications
                             </Typography>
                             {
