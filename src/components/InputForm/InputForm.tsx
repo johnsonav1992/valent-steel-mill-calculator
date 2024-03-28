@@ -42,18 +42,17 @@ const InputForm = ( {
             formStore={ formStore }
             onSubmit={ values => {
                 const isMissingAnyValue
-                    = Object.entries( values.initialSpec ).some( ( [ , value ] ) => !value )
-                    || Object.entries( values.finalSpec ).some( ( [ , value ] ) => !value );
+                    = Object.entries( values.initialSpec ).some( ( [ , value ] ) => !value || Number( value ) < 0 )
+                    || Object.entries( values.finalSpec ).some( ( [ , value ] ) => !value || Number( value ) < 0 );
 
                 const initialSpecPercent = Object.entries( values.initialSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
 
                 const finalSpecPercent = Object.entries( values.finalSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
-                console.log( { initialSpecPercent }, { finalSpecPercent } );
 
                 const isNotCorrectTotalPercent = initialSpecPercent !== 100 || finalSpecPercent !== 100;
 
                 if ( isMissingAnyValue ) {
-                    return openWarningModal( 'Please enter all values for each specification.' );
+                    return openWarningModal( 'Please enter all values for each specification. All values must be greater than 0.' );
                 }
 
                 if ( isNotCorrectTotalPercent ) {
@@ -145,7 +144,7 @@ const InputForm = ( {
                             component={ Button }
                             variant='outlined'
                         >
-                            Reset
+                            Clear
                         </ResetButton>
                         <SubmitButton
                             component={ Button }

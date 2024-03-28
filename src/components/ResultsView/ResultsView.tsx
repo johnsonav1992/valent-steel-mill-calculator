@@ -39,10 +39,9 @@ const ResultsView = ( {
                 sx={ {
                     backgroundColor: theme => theme.palette.grey[ 200 ]
                     , p: '.5rem'
-                    , pb: 0
                 } }
             >
-                <Stack ml='16px'>
+                <Stack p='.5rem'>
                     <Typography variant='h5'>
                         Results
                     </Typography>
