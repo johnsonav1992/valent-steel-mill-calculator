@@ -45,9 +45,9 @@ const InputForm = ( {
                     = Object.entries( values.initialSpec ).some( ( [ , value ] ) => !value || Number( value ) < 0 )
                     || Object.entries( values.finalSpec ).some( ( [ , value ] ) => !value || Number( value ) < 0 );
 
-                const initialSpecPercent = Object.entries( values.initialSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
+                const initialSpecPercent = Object.entries( values.initialSpec ).reduce( ( total, [ , value ] ) => { return total + Number( value ); }, 0 );
 
-                const finalSpecPercent = Object.entries( values.finalSpec ).reduce( ( total, [ key, value ] ) => { return total + Number( value ); }, 0 );
+                const finalSpecPercent = Object.entries( values.finalSpec ).reduce( ( total, [ , value ] ) => { return total + Number( value ); }, 0 );
 
                 const isNotCorrectTotalPercent = initialSpecPercent !== 100 || finalSpecPercent !== 100;
 
