@@ -113,7 +113,7 @@ const finalSpecs: SteelSpec[] = [
         , iron: 67.00
     }
     , {
-        chromium: 17.50
+        chromium: 2.17
         , nickel: 11.20
         , molybdenum: 2.80
         , carbon: 0.09
@@ -122,7 +122,7 @@ const finalSpecs: SteelSpec[] = [
         , sulfur: 0.39
         , silicon: 0.78
         , nitrogen: 0.11
-        , iron: 64.67
+        , iron: 80
     }
 ];
 

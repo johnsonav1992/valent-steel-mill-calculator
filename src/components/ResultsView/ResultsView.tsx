@@ -110,7 +110,7 @@ const ResultsView = ( {
                     Return
                 </Button>
                 <Typography>
-                    { `Total Final Weight: ${ result.totalFinalWeight }kg` }
+                    { `Total Final Weight: ${ result.totalFinalWeight.toFixed( 2 ) }kg` }
                 </Typography>
             </Stack>
         </Stack>

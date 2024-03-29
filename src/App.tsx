@@ -54,7 +54,10 @@ function App () {
     const [ warningMessage, setWarningMessage ] = useState( '' );
     const [ isWarningModalOpen, setIsWarningModalOpen ] = useState( !!warningMessage );
 
-    const { resetForm } = useFormularity( { formStore } );
+    const {
+        resetForm
+        , values
+    } = useFormularity( { formStore } );
 
     return (
         <>
@@ -88,9 +91,8 @@ function App () {
                                 clickable
                                 onClick={ () => {
                                     const dummyData = generateDummyData();
-                                    console.log( dummyData );
                                     resetForm( {
-                                        initialTotalWeight: 1000
+                                        initialTotalWeight: values.initialTotalWeight
                                         , initialSpec: dummyData.initialSpec
                                         , finalSpec: dummyData.finalSpec
                                     } );

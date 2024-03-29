@@ -10,9 +10,9 @@ export const findMaxDecreaseElement = ( initSpec: SteelSpec, finalSpec: SteelSpe
 
     let element: SteelElement;
     for ( element in initSpec ) {
-        const decrease = initSpec[ element ] / finalSpec[ element ];
-        if ( decrease > maxDecrease ) {
-            maxDecrease = decrease;
+        const decreaseRatio = initSpec[ element ] / finalSpec[ element ];
+        if ( decreaseRatio > maxDecrease ) {
+            maxDecrease = decreaseRatio;
             elementWithMaxDecrease = element;
         }
     }
