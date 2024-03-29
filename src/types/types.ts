@@ -15,7 +15,10 @@ export type SpecFormInput = {
     [ Elem in keyof SteelSpec ]: number | string | null
 };
 
-export type WeightsOutput = SteelSpec;
+export type WeightsOutput = {
+    weightAdditions: SteelSpec;
+    totalFinalWeight: number;
+};
 
 export type SteelSpecFormValues = {
     initialTotalWeight: number | string | null;

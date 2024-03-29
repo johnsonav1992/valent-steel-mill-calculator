@@ -49,7 +49,7 @@ const ResultsView = ( {
                         variant='caption'
                         fontStyle='italic'
                     >
-                        *All weights shown below will be added to the mixture to achieve final spec
+                        *All weights shown below will be added to the mixture to achieve final spec.
                     </Typography>
                 </Stack>
             </Stack>
@@ -83,7 +83,7 @@ const ResultsView = ( {
                     </TableHead>
                     <TableBody>
                         {
-                            ( Object.entries( result ) as Array<[keyof SteelSpec, number]> ).map( ( [ elem, weight ] ) => (
+                            ( Object.entries( result.weightAdditions ) as Array<[keyof SteelSpec, number]> ).map( ( [ elem, weight ] ) => (
                                 <TableRow key={ elem }>
                                     <TableCell>
                                         { capitalize( elem ) }
@@ -97,16 +97,22 @@ const ResultsView = ( {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Button
-                startIcon={ <ArrowBack /> }
-                sx={ {
-                    alignSelf: 'flex-start'
-                    , mt: '.5rem'
-                } }
-                onClick={ () => setResult( null ) }
+            <Stack
+                direction='row'
+                justifyContent='space-between'
+                alignItems='center'
+                mt='.5rem'
             >
-                Return
-            </Button>
+                <Button
+                    startIcon={ <ArrowBack /> }
+                    onClick={ () => setResult( null ) }
+                >
+                    Return
+                </Button>
+                <Typography>
+                    { `Total Final Weight: ${ result.totalFinalWeight }kg` }
+                </Typography>
+            </Stack>
         </Stack>
     );
 };

@@ -128,8 +128,8 @@ const finalSpecs: SteelSpec[] = [
 
 export const generateDummyData = (): { initialSpec: SteelSpec; finalSpec: SteelSpec } => {
     const randomIndex = Math.floor( Math.random() * initialSpecs.length );
-    const initialSpec = initialSpecs[ randomIndex ];
-    const finalSpec = finalSpecs[ randomIndex ];
+    const initialSpec = { ... initialSpecs[ randomIndex ] };
+    const finalSpec = { ...finalSpecs[ randomIndex ] };
 
     return {
         initialSpec

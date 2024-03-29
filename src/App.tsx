@@ -88,6 +88,7 @@ function App () {
                                 clickable
                                 onClick={ () => {
                                     const dummyData = generateDummyData();
+                                    console.log( dummyData );
                                     resetForm( {
                                         initialTotalWeight: 1000
                                         , initialSpec: dummyData.initialSpec

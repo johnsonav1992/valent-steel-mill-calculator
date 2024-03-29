@@ -2,7 +2,6 @@ import {
     SpecFormInput
     , SteelElement
     , SteelSpec
-    , WeightsOutput
 } from '../types/types';
 
 export const findMaxDecreaseElement = ( initSpec: SteelSpec, finalSpec: SteelSpec ) => {
@@ -11,7 +10,7 @@ export const findMaxDecreaseElement = ( initSpec: SteelSpec, finalSpec: SteelSpe
 
     let element: SteelElement;
     for ( element in initSpec ) {
-        const decrease = initSpec[ element ] - finalSpec[ element ];
+        const decrease = initSpec[ element ] / finalSpec[ element ];
         if ( decrease > maxDecrease ) {
             maxDecrease = decrease;
             elementWithMaxDecrease = element;
@@ -30,7 +29,7 @@ export const calculateWeightIncreases = (
     const finalTotalSpecWeight
       = ( initSpec[ maxDecreaseElement ] * initWeight ) / finalSpec[ maxDecreaseElement ];
 
-    const weightsToAdd = {} as WeightsOutput;
+    const weightsToAdd = {} as SteelSpec;
 
     let elem: SteelElement;
     for ( elem in finalSpec ) {
@@ -41,10 +40,17 @@ export const calculateWeightIncreases = (
         );
 
         weightsToAdd[ elem ] = weightToAdd;
-
     }
 
-    return weightsToAdd;
+    const totalWeightAdditions = Object.values( weightsToAdd )
+        .reduce( ( acc, val ) => acc + val, 0 );
+
+    const totalFinalWeight = initWeight + totalWeightAdditions;
+
+    return {
+        weightAdditions: weightsToAdd
+        , totalFinalWeight
+    };
 };
 
 export const convertSpecPercentages = ( spec: SpecFormInput ) => {
